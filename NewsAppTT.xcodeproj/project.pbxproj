@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		F977521D24B86E4400A67C7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F977521C24B86E4400A67C7E /* AppDelegate.swift */; };
 		F977521F24B86E4400A67C7E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F977521E24B86E4400A67C7E /* SceneDelegate.swift */; };
-		F977522124B86E4400A67C7E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F977522024B86E4400A67C7E /* ViewController.swift */; };
 		F977522424B86E4400A67C7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F977522224B86E4400A67C7E /* Main.storyboard */; };
 		F977522624B86E4C00A67C7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F977522524B86E4C00A67C7E /* Assets.xcassets */; };
 		F977522924B86E4C00A67C7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F977522724B86E4C00A67C7E /* LaunchScreen.storyboard */; };
+		F977523224B8701000A67C7E /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = F977523124B8701000A67C7E /* Article.swift */; };
+		F977523424B8710F00A67C7E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F977523324B8710F00A67C7E /* Model.swift */; };
+		F977523A24B8858700A67C7E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F977523924B8858700A67C7E /* MainViewController.swift */; };
+		F977523C24B886ED00A67C7E /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F977523B24B886ED00A67C7E /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F977521924B86E4400A67C7E /* NewsAppTT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsAppTT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F977521C24B86E4400A67C7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F977521E24B86E4400A67C7E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F977522024B86E4400A67C7E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F977522324B86E4400A67C7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F977522524B86E4C00A67C7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F977522824B86E4C00A67C7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F977522A24B86E4C00A67C7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F977523124B8701000A67C7E /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		F977523324B8710F00A67C7E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		F977523924B8858700A67C7E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		F977523B24B886ED00A67C7E /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,26 @@
 		F977521B24B86E4400A67C7E /* NewsAppTT */ = {
 			isa = PBXGroup;
 			children = (
+				F977523024B86F2100A67C7E /* Model */,
 				F977521C24B86E4400A67C7E /* AppDelegate.swift */,
+				F977523B24B886ED00A67C7E /* CustomTableViewCell.swift */,
+				F977523924B8858700A67C7E /* MainViewController.swift */,
 				F977521E24B86E4400A67C7E /* SceneDelegate.swift */,
-				F977522024B86E4400A67C7E /* ViewController.swift */,
 				F977522224B86E4400A67C7E /* Main.storyboard */,
 				F977522524B86E4C00A67C7E /* Assets.xcassets */,
 				F977522724B86E4C00A67C7E /* LaunchScreen.storyboard */,
 				F977522A24B86E4C00A67C7E /* Info.plist */,
 			);
 			path = NewsAppTT;
+			sourceTree = "<group>";
+		};
+		F977523024B86F2100A67C7E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F977523124B8701000A67C7E /* Article.swift */,
+				F977523324B8710F00A67C7E /* Model.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +155,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F977522124B86E4400A67C7E /* ViewController.swift in Sources */,
+				F977523C24B886ED00A67C7E /* CustomTableViewCell.swift in Sources */,
+				F977523424B8710F00A67C7E /* Model.swift in Sources */,
+				F977523224B8701000A67C7E /* Article.swift in Sources */,
 				F977521D24B86E4400A67C7E /* AppDelegate.swift in Sources */,
 				F977521F24B86E4400A67C7E /* SceneDelegate.swift in Sources */,
+				F977523A24B8858700A67C7E /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +307,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X4XTZSDF67;
 				INFOPLIST_FILE = NewsAppTT/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -294,7 +315,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Qulix.NewsAppTT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -305,6 +326,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X4XTZSDF67;
 				INFOPLIST_FILE = NewsAppTT/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,7 +334,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Qulix.NewsAppTT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
