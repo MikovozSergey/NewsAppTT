@@ -19,35 +19,41 @@ var urlToData: URL {
 
 // MARK: Functions
 
-func loadNews(completionHandler: (() -> Void)?) {
-    let url = URL(string: "http://newsapi.org/v2/everything?q=bitcoin&from=2020-06-10&sortBy=publishedAt&apiKey=542fc32d19d34ae68f9b3aa671fda5ac")
+
+func getPreviousStrDate(with number: Int) -> String {
+    
+    guard let previousDate = Calendar.current.date(byAdding: .day, value: -number, to: Date()) else { return "" }
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    let date = dateFormatter.string(from: previousDate)
+    return date
+}
+
+
+func loadNews(with number: Int, completionHandler: (() -> Void)?) {
+    //2020-06-12
+    
+    let date = getPreviousStrDate(with: number)
+    guard let url = URL(string: "http://newsapi.org/v2/everything?q=football&from=\(date)&to=\(date)&sortBy=popularity&apiKey=1e1b7bbe50cb49258a50ff635e64929a") else { return }
+    
     
     let session = URLSession(configuration: .default)
     
-    let downloadTask = session.downloadTask(with: url!) { (urlFile, response, error) in
-        // check in error
-        if urlFile != nil {
-            // copy to local FileManager
-            try? FileManager.default.copyItem(at: urlFile!, to: urlToData)
-            
-            openNews()
-            
+    let downloadTask = session.dataTask(with: url) { (data, response, error) in
+        if let result = data {
+            let flag = number == 0 ? true : false
+            openNews(with: result, with: flag)
             completionHandler?()
         }
     }
-    
     downloadTask.resume()
 }
 
 // parsing json file
-func openNews() {
+func openNews(with data: Data, with flag: Bool) {
     // get binary data
-    let data = try? Data(contentsOf: urlToData)
-    if data == nil {
-        return
-    }
     
-    let fundamentalDictionaryOfAny = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+    let fundamentalDictionaryOfAny = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
     if fundamentalDictionaryOfAny == nil {
         return
     }
@@ -59,14 +65,13 @@ func openNews() {
     
     if let arrayOfArticles = fundamentalDictionary!["articles"] as? [Dictionary<String, Any>] {
         
-        // get values
-        var returnArrayOfArticles : [Article] = []
+        if flag {
+            articles.removeAll()
+        }
         
         for dictionary in arrayOfArticles {
             let newArticle = Article(dictionary: dictionary)
-            returnArrayOfArticles.append(newArticle)
+            articles.append(newArticle)
         }
-        
-        articles = returnArrayOfArticles
     }
 }

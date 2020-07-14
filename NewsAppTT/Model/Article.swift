@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Article {
+struct Article: Codable {
     var author: String
     var title: String
     var description: String
@@ -17,6 +17,18 @@ struct Article {
     var publishedAt: String
     var sourceName: String
     
+    var isHiddenShowMoreButton = false
+    
+    func getDate() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        guard let date = dateFormatter.date(from:publishedAt) else { return Date() }
+        
+        return date
+    }
+    
+    
     init(dictionary: Dictionary<String, Any>) {
         
         author = dictionary["author"] as? String ?? ""
@@ -24,8 +36,14 @@ struct Article {
         description = dictionary["description"] as? String ?? ""
         url = dictionary["url"] as? String ?? ""
         urlToImage = dictionary["urlToImage"] as? String ?? ""
-        publishedAt = dictionary["publishedAt"] as? String ?? ""
         sourceName = (dictionary["source"] as? Dictionary<String, Any> ?? ["":""])["name"] as? String ?? ""
-
+        publishedAt = dictionary["publishedAt"] as? String ?? ""
+        
     }
+}
+
+struct Test: Codable {
+    let status: String
+    let totalResults: Int
+    let article: [Article]
 }
