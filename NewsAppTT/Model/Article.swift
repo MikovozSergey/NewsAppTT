@@ -22,7 +22,7 @@ struct Article: Codable {
     func getDate() -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         guard let date = dateFormatter.date(from:publishedAt) else { return Date() }
         
         return date
@@ -38,12 +38,7 @@ struct Article: Codable {
         urlToImage = dictionary["urlToImage"] as? String ?? ""
         sourceName = (dictionary["source"] as? Dictionary<String, Any> ?? ["":""])["name"] as? String ?? ""
         publishedAt = dictionary["publishedAt"] as? String ?? ""
-        
     }
 }
 
-struct Test: Codable {
-    let status: String
-    let totalResults: Int
-    let article: [Article]
-}
+

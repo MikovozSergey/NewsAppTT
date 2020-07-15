@@ -23,8 +23,12 @@ class CustomTableViewCell: UITableViewCell {
     
     func configure(with model: Article) {
         self.model = model
+        
         self.titleLabel.text =  model.title
+    
         self.subtitleLabel.text =  model.description
+        self.subtitleLabel.textColor = UIColor(rgb: 0x464748)
+        
         self.showMoreButton.isHidden = isHiddenShowMoreButton()
         
         DispatchQueue.main.async {

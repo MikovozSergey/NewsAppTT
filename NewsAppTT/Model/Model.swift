@@ -31,11 +31,9 @@ func getPreviousStrDate(with number: Int) -> String {
 
 
 func loadNews(with number: Int, completionHandler: (() -> Void)?) {
-    //2020-06-12
     
     let date = getPreviousStrDate(with: number)
     guard let url = URL(string: "http://newsapi.org/v2/everything?q=football&from=\(date)&to=\(date)&sortBy=popularity&apiKey=1e1b7bbe50cb49258a50ff635e64929a") else { return }
-    
     
     let session = URLSession(configuration: .default)
     

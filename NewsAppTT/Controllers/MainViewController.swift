@@ -17,11 +17,10 @@ class MainViewController: UITableViewController {
         super.viewDidLoad()
         
         load(with: previousIndex)
-        setupOptions()
+        setupOptionsForRefreshButton()
     }
     
-    private func setupOptions() {
-        
+    private func setupOptionsForRefreshButton() {
         rightNavigationBarButtonItem = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "refresh"), style: .done, target: self, action: #selector(rightNavigationBarButtonTapped))
         navigationItem.rightBarButtonItem = rightNavigationBarButtonItem
         
@@ -31,18 +30,16 @@ class MainViewController: UITableViewController {
     }
     
     private func createButton(with title: String) -> UIButton {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
         button.layer.borderColor = UIColor.white.cgColor
-        button.layer.borderWidth = 0.5
-        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 0
+        //button.layer.cornerRadius = 20
         button.setTitle(title, for: .normal)
-        button.backgroundColor = .gray
-        button.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
-        button.layer.shadowRadius = 5.0
-        button.layer.shadowOpacity = 1.0
+        button.backgroundColor = UIColor(rgb: 0x3996FB)
         button.layer.masksToBounds = false
         button.clipsToBounds = false
         button.addTarget(self, action: #selector(ratingButtonTapped(button:)), for: .touchUpInside)
+        
         return button
     }
     
@@ -94,11 +91,27 @@ class MainViewController: UITableViewController {
         return cell
     }
     
+    // Animations for cells
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let translationTransform = CATransform3DTranslate(CATransform3DIdentity, -300, 200, 0)
+        cell.layer.transform = translationTransform
+        
+        UIView.animate(withDuration: 1, delay: 0.2, options: .curveEaseOut, animations: {
+            cell.layer.transform = CATransform3DIdentity
+        })
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showArticle", sender: self)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showArticle" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 (segue.destination as? ArticleViewController)?.article = articles[indexPath.row]
                 tableView.deselectRow(at: indexPath, animated: true)
+
             }
         }
     }
