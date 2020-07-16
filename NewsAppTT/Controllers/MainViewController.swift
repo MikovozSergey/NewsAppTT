@@ -10,14 +10,32 @@ import UIKit
 
 class MainViewController: UITableViewController {
     
-    var previousIndex: Int = 0
+    let searchController = UISearchController(searchResultsController: nil) // для отображения результатов будем использовать тот же view
+    
+    var filteredNews: [Article] = []
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false}
+        return text.isEmpty
+    }
+    private var previousIndex: Int = 0
     private var rightNavigationBarButtonItem: UIBarButtonItem!
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         load(with: previousIndex)
         setupOptionsForRefreshButton()
+        
+        // setup the searchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+
     }
     
     private func setupOptionsForRefreshButton() {
@@ -68,6 +86,9 @@ class MainViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return filteredNews.count
+        }
         return articles.count
     }
     
@@ -78,10 +99,16 @@ class MainViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+
+        var article : Article?
         
-        let article = articles[indexPath.row]
+        if isFiltering {
+            article = filteredNews[indexPath.row]
+        } else {
+            article = articles[indexPath.row]
+        }
         
-        cell.configure(with: article)
+        cell.configure(with: article!)
         cell.showMoreDidTapHandler = { 
             articles[indexPath.row].isHiddenShowMoreButton.toggle()
             tableView.beginUpdates()
@@ -106,13 +133,23 @@ class MainViewController: UITableViewController {
         performSegue(withIdentifier: "showArticle", sender: self)
     }
 
+    // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showArticle" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 (segue.destination as? ArticleViewController)?.article = articles[indexPath.row]
                 tableView.deselectRow(at: indexPath, animated: true)
+                
+                var article: Article?
+                if isFiltering {
+                    article = filteredNews[indexPath.row]
+                } else {
+                    article = articles[indexPath.row]
+                }
 
             }
         }
     }
 }
+
+

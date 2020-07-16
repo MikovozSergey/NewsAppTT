@@ -1,5 +1,5 @@
 //
-//  Model.swift
+//  Article.swift
 //  NewsAppTT
 //
 //  Created by Дарья Станкевич on 7/10/20.
@@ -8,68 +8,36 @@
 
 import Foundation
 
-var articles: [Article] = [] // array of news
-
-var urlToData: URL {
-    let path = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0] + "/data.json"
-    // convert to url our path
-    let urlPath = URL(fileURLWithPath: path)
-    return urlPath
-}
-
-// MARK: Functions
-
-
-func getPreviousStrDate(with number: Int) -> String {
+struct Article: Codable {
+    var author: String
+    var title: String
+    var description: String
+    var url: String
+    var urlToImage: String
+    var publishedAt: String
+    var sourceName: String
     
-    guard let previousDate = Calendar.current.date(byAdding: .day, value: -number, to: Date()) else { return "" }
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd"
-    let date = dateFormatter.string(from: previousDate)
-    return date
-}
-
-
-func loadNews(with number: Int, completionHandler: (() -> Void)?) {
+    var isHiddenShowMoreButton = false
     
-    let date = getPreviousStrDate(with: number)
-    guard let url = URL(string: "http://newsapi.org/v2/everything?q=football&from=\(date)&to=\(date)&sortBy=popularity&apiKey=1e1b7bbe50cb49258a50ff635e64929a") else { return }
-    
-    let session = URLSession(configuration: .default)
-    
-    let downloadTask = session.dataTask(with: url) { (data, response, error) in
-        if let result = data {
-            let flag = number == 0 ? true : false
-            openNews(with: result, with: flag)
-            completionHandler?()
-        }
-    }
-    downloadTask.resume()
-}
-
-// parsing json file
-func openNews(with data: Data, with flag: Bool) {
-    // get binary data
-    
-    let fundamentalDictionaryOfAny = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
-    if fundamentalDictionaryOfAny == nil {
-        return
-    }
-    
-    let fundamentalDictionary = fundamentalDictionaryOfAny as? Dictionary<String, Any>
-    if fundamentalDictionary == nil {
-        return
-    }
-    
-    if let arrayOfArticles = fundamentalDictionary!["articles"] as? [Dictionary<String, Any>] {
+    func getDate() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        guard let date = dateFormatter.date(from: publishedAt) else { return Date() }
         
-        if flag {
-            articles.removeAll()
-        }
+        return date
+    }
+    
+    init(dictionary: Dictionary<String, Any>) {
         
-        for dictionary in arrayOfArticles {
-            let newArticle = Article(dictionary: dictionary)
-            articles.append(newArticle)
-        }
+        author = dictionary["author"] as? String ?? ""
+        title = dictionary["title"] as? String ?? ""
+        description = dictionary["description"] as? String ?? ""
+        url = dictionary["url"] as? String ?? ""
+        urlToImage = dictionary["urlToImage"] as? String ?? ""
+        sourceName = (dictionary["source"] as? Dictionary<String, Any> ?? ["":""])["name"] as? String ?? ""
+        publishedAt = dictionary["publishedAt"] as? String ?? ""
     }
 }
+
+
