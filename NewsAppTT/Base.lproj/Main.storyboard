@@ -23,10 +23,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" id="RoW-jQ-LP7">
-                                            <rect key="frame" x="32" y="40" width="50" height="41"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </activityIndicatorView>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d8f-1r-2sh">
                                             <rect key="frame" x="15" y="17.5" width="85" height="85"/>
                                             <constraints>
@@ -54,21 +50,31 @@
                                                 <color key="titleColor" red="0.22352941179999999" green="0.58823529409999997" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                         </button>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="RoW-jQ-LP7">
+                                            <rect key="frame" x="45" y="48" width="25" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="OGP-vJ-j4m"/>
+                                                <constraint firstAttribute="width" constant="25" id="ejH-1Z-9OK"/>
+                                            </constraints>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <constraints>
                                         <constraint firstItem="QW9-fC-oqw" firstAttribute="top" secondItem="0Fs-Tl-txq" secondAttribute="bottom" constant="10" id="3Rg-vO-i31"/>
                                         <constraint firstItem="d8f-1r-2sh" firstAttribute="centerY" secondItem="72B-ji-vww" secondAttribute="centerY" id="CmM-s5-mru"/>
+                                        <constraint firstItem="RoW-jQ-LP7" firstAttribute="leading" secondItem="d8f-1r-2sh" secondAttribute="trailing" constant="-55" id="F4N-2A-dvc"/>
+                                        <constraint firstItem="RoW-jQ-LP7" firstAttribute="centerX" secondItem="d8f-1r-2sh" secondAttribute="centerX" id="HC7-Na-tOL"/>
                                         <constraint firstAttribute="trailing" secondItem="0Fs-Tl-txq" secondAttribute="trailing" constant="5" id="JLd-zs-oCJ"/>
+                                        <constraint firstItem="RoW-jQ-LP7" firstAttribute="top" secondItem="d8f-1r-2sh" secondAttribute="bottom" constant="-54.5" id="Jca-tT-eI7"/>
                                         <constraint firstItem="LUm-55-rQc" firstAttribute="top" secondItem="QW9-fC-oqw" secondAttribute="bottom" constant="11" id="LRo-Sp-hJg"/>
                                         <constraint firstItem="QW9-fC-oqw" firstAttribute="leading" secondItem="d8f-1r-2sh" secondAttribute="trailing" constant="10" id="Pv5-mZ-zEG"/>
-                                        <constraint firstItem="QW9-fC-oqw" firstAttribute="leading" secondItem="RoW-jQ-LP7" secondAttribute="trailing" constant="28" id="ReB-md-sW3"/>
                                         <constraint firstItem="d8f-1r-2sh" firstAttribute="leading" secondItem="72B-ji-vww" secondAttribute="leading" constant="15" id="Sz7-jY-fMD"/>
                                         <constraint firstAttribute="trailing" secondItem="QW9-fC-oqw" secondAttribute="trailing" constant="15" id="aPY-aJ-Dq9"/>
                                         <constraint firstItem="0Fs-Tl-txq" firstAttribute="top" secondItem="72B-ji-vww" secondAttribute="top" constant="10" id="fAq-5H-4VY"/>
                                         <constraint firstAttribute="trailing" secondItem="LUm-55-rQc" secondAttribute="trailing" constant="14" id="jFn-cg-EVG"/>
                                         <constraint firstAttribute="bottom" secondItem="LUm-55-rQc" secondAttribute="bottom" id="ned-Q4-mbC"/>
                                         <constraint firstItem="0Fs-Tl-txq" firstAttribute="leading" secondItem="d8f-1r-2sh" secondAttribute="trailing" constant="10" id="upT-rx-T7U"/>
+                                        <constraint firstItem="RoW-jQ-LP7" firstAttribute="centerY" secondItem="d8f-1r-2sh" secondAttribute="centerY" id="w7y-uv-bPa"/>
                                         <constraint firstItem="LUm-55-rQc" firstAttribute="leading" relation="lessThanOrEqual" secondItem="d8f-1r-2sh" secondAttribute="trailing" constant="196" id="y6g-eg-Hzk"/>
                                     </constraints>
                                 </tableViewCellContentView>

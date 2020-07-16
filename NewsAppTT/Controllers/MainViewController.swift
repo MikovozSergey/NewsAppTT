@@ -121,7 +121,7 @@ class MainViewController: UITableViewController {
     // Animations for cells
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let translationTransform = CATransform3DTranslate(CATransform3DIdentity, -300, 200, 0)
+        let translationTransform = CATransform3DTranslate(CATransform3DIdentity, -300, 0, 0)
         cell.layer.transform = translationTransform
         
         UIView.animate(withDuration: 1, delay: 0.2, options: .curveEaseOut, animations: {

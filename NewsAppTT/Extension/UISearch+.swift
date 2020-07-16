@@ -8,7 +8,7 @@ extension MainViewController: UISearchResultsUpdating {
 
     private func filterContentForSearchText(_ searchText: String) {
 
-        filteredNews = articles.filter { [$0.title].contains(searchController.searchBar.text) }
+        filteredNews = articles.filter { $0.title.contains(searchController.searchBar.text ?? "") }
 
         tableView.reloadData()
     }

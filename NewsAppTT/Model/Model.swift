@@ -6,7 +6,7 @@
 //  Copyright © 2020 Sergey Mikovoz. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Article: Codable {
     var author: String
