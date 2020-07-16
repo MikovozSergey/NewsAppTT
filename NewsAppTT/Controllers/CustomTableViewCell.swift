@@ -42,7 +42,7 @@ class CustomTableViewCell: UITableViewCell {
             }
         }
     
-        setupHandling()
+        setupHandlng()
         self.selectionStyle = .none
     }
     

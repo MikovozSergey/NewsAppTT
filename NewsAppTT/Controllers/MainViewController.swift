@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: UITableViewController {
     
-    let searchController = UISearchController(searchResultsController: nil) // для отображения результатов будем использовать тот же view
+    let searchController = UISearchController(searchResultsController: nil) // using the same view
     
     var filteredNews: [Article] = []
     private var searchBarIsEmpty: Bool {
@@ -140,7 +140,7 @@ class MainViewController: UITableViewController {
                 (segue.destination as? ArticleViewController)?.article = articles[indexPath.row]
                 tableView.deselectRow(at: indexPath, animated: true)
                 
-                var article: Article?
+                var article : Article?
                 if isFiltering {
                     article = filteredNews[indexPath.row]
                 } else {
